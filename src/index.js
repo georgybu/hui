@@ -1,22 +1,20 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+export { default as Button } from './components/Button';
+export { default as HsgProvider } from './components/HsgProvider';
+export { default as Strip } from './components/Strip';
+export { default as Top } from './components/Top';
+export { default as Head } from './components/Head';
+export { default as Container } from './components/Container';
+export { default as Definition } from './components/Definition';
+export { default as Loader } from './components/Loader';
+export { default as Grid } from './components/Grid';
+export { default as Input } from './components/Input';
+export { default as Textarea } from './components/Textarea';
+export { default as Background } from './components/Background';
+export { default as Panel } from './components/Panel';
+export { default as Pagination } from './components/Pagination';
 
-import styles from './styles.css'
-
-export default class ExampleComponent extends Component {
-  static propTypes = {
-    text: PropTypes.string
-  }
-
-  render() {
-    const {
-      text
-    } = this.props
-
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
-  }
-}
+export { IconLink } from './components/Icon/Link';
+export { IconPhone } from './components/Icon/Phone';
+export { IconTimer } from './components/Icon/Timer';
+export { IconSave } from './components/Icon/Save';
+export { IconReload } from './components/Icon/Reload';

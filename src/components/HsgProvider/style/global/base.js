@@ -1,7 +1,7 @@
 import theme from '../../theme';
 
 const variables = {
-  background: '#F9F9F9',
+  background: '#f8fafd',
   emColor: '#d05',
   insBackground: '#ffa',
   insColor: '#444',

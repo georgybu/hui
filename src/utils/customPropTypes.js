@@ -1,5 +1,5 @@
 
-function isUrl(string){
+function isUrl(string) {
   const protocolAndDomainRE = /^(?:\w+:)?\/\/(\S+)$/; // eslint-disable-line
   const localhostDomainRE = /^localhost[\:?\d]*(?:[^\:?\d]\S*)?$/ // eslint-disable-line
   const nonLocalhostDomainRE = /^[^\s\.]+\.\S{2,}$/; // eslint-disable-line
@@ -27,25 +27,13 @@ function isUrl(string){
 }
 
 
-const requiredUrlPropType = (props, propName, componentName) => {
+export const url = (props, propName, componentName) => {
   const value = props[propName];
   componentName = componentName || 'ANONYMOUS';
 
-  if (value == null || typeof value !== 'string' || (!value.startsWith('/') && !isUrl(value))) {
+  if (typeof value === 'string' && (!value.startsWith('/') && !isUrl(value))) {
     return new Error(`Invalid URL prop value '${value}' for ${propName} in ${componentName}`);
   }
 
   return null;
 }
-
-const url = (props, propName, componentName) => {
-  if (props[propName] == null) {
-    return null;
-  }
-
-  return requiredUrlPropType(props, propName, componentName);
-}
-
-url.isRequired = requiredUrlPropType;
-
-export default url;

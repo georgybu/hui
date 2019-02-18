@@ -36,36 +36,46 @@ class Pagination extends Component {
 
   render() {
     const {
-      hideOnSinglePage,
-      pageSize,
-      total
-    } = this.props;
-
-    const {
       current,
       pageSize
     } = this.state;
 
     // hide pagination on single page, if needed
-    if (hideOnSinglePage && total <= pageSize) {
+    if (this.props.hideOnSinglePage && this.props.total <= this.props.pageSize) {
       return null;
     }
 
     const pagerList = [];
+    const prevItemTitle = (this.props.prevTitle) ? this.props.prevTitle : 'הקודם';
+    const nextItemTitle = (this.props.nextTitle) ? this.props.nextTitle : 'הבא';
     const allPages = calculatePage(undefined, this.state, this.props);
     const prevPage = current - 1 > 0 ? current - 1 : 0;
     const nextPage = current + 1 < allPages ? current + 1 : allPages;
+    const prevItem = <Pager key="prev" page={prevItemTitle} disabled={current === 1} />;
+    const nextItem = <Pager key="next" page={nextItemTitle} disabled={current === allPages - 1} />;
 
     // TODO: set aria rules
 
-    for (let index = 0; index < allPages; index++) {
-      // const active = this.sta
+    pagerList.push(prevItem);
 
+    for (let index = 1; index <= allPages; index++) {
+      const active = current === index;
+      pagerList.push(
+        <Pager
+          key={index}
+          page={index}
+          active={active}
+        />
+      )
     }
+
+    pagerList.push(nextItem);
 
 
     return (
-      <WithStyle>pagination</WithStyle>
+      <WithStyle>
+        {pagerList}
+      </WithStyle>
     )
   }
 }

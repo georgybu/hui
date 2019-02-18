@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import WithStyle from './Head.style';
 import { customPropTypes, isChildrenNil } from '../../utils';
+import Title from './Title';
+import Subtitle from './Subtitle';
+import Action from './Action';
 
 
 const Head = props => {
@@ -16,17 +19,9 @@ const Head = props => {
 
   return (
     <WithStyle>
-      {content && 
-        <h1 className="title">{content}</h1>
-      }
-
-      {subtitle && 
-        <h2 className="subtitle">{subtitle}</h2>
-      }
-      
-      {pdfUrl &&
-        <a href={pdfUrl} className="pdf">PDF</a>
-      }
+      <Title content={content} />
+      <Subtitle content={subtitle} />
+      <Action href={pdfUrl} content="PDF" />
     </WithStyle>
   )
 }

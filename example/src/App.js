@@ -22,12 +22,12 @@ export default class App extends Component {
           <Grid direction="col">
             <Grid.Column>
               <Panel type="dark">
-              טופס מסננים
+                טופס מסננים
               </Panel>
             </Grid.Column>
             <Grid.Column>
               <Panel type="light">
-                טבלת תוצאות
+                  טבלת תוצאות
               </Panel>
             </Grid.Column>
           </Grid>

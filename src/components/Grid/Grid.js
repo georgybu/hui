@@ -6,8 +6,8 @@ import Column from './Column';
 const Grid = (props) => {
   const {
     spacing,
-    equal,
-    rest,
+    equalHeight,
+    col,
     sm,
     md,
     lg,
@@ -16,14 +16,14 @@ const Grid = (props) => {
 
   const cloneData = Object.assign({},
     spacing && {spacing},
-    equal && {equal},
-    rest && {rest},
+    equalHeight && {equalHeight},
+    col && {col},
     sm && {sm},
     md && {md},
     lg && {lg}
   )
 
-  const childrenWithProps = React.Children.map(children, child => 
+  const childrenWithProps = React.Children.map(children, child =>
     React.cloneElement(child, cloneData)
   )
 

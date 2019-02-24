@@ -31,7 +31,7 @@ const Pager = (props) => {
     <WithStyle
       title={title}
       className={className}
-      onClick={onClick}
+      onClick={handleClick}
       onKeyPress={handleKeyPress}
       tabIndex={tabIndex}
       active={active}

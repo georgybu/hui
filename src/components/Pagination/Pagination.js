@@ -1,24 +1,41 @@
 import React, { Component } from 'react';
 import WithStyle from './Pagination.style';
 import Pager from './Pager';
+import Total from './Total';
 import PropTypes from 'prop-types';
+import { isInteger } from '../../utils';
+
+
+function noop() {}
+
 
 
 /**
- * TODO: change this function to recieve only the needed data and not all object?!
+ * Calculate total number of pages
+ * @param {number} total
+ * @param {number} pageSize
+ * @return {number}
+ */
+const calculatePage = (total, pageSize) => {
+  return Math.floor((total - 1) / pageSize) + 1;
+}
+
+
+/**
+ * TODO: change this function to recieve only the needed data and not all object(?!)
  * Calculate total number of pages
  * @param {number} pageSize
  * @param {object} state
  * @param {object} props
  * @return {number}
  */
-const calculatePage = (pageSize, state, props) => {
-  if (typeof pageSize === 'undefined') {
-    pageSize = state.pageSize;
-  }
+// const calculatePage = (pageSize, state, props) => {
+//   if (typeof pageSize === 'undefined') {
+//     pageSize = state.pageSize;
+//   }
 
-  return Math.floor((props.total - 1) / pageSize) + 1;
-}
+//   return Math.floor((props.total - 1) / pageSize) + 1;
+// }
 
 
 class Pagination extends Component {
@@ -34,46 +51,214 @@ class Pagination extends Component {
     }
   }
 
+  prev = () => {
+    if (this.hasPrev()) {
+      this.handleChange(this.state.current - 1);
+    }
+  }
+
+  next = () => {
+    if (this.hasNext()) {
+      this.handleChange(this.state.current + 1);
+    }
+  }
+
+  last = () => {
+    const {
+      total
+    } = this.props;
+
+    const {
+      pageSize
+    } = this.state;
+
+    if (this.hasNext()) {
+      const allPages = calculatePage(total, pageSize);
+      this.handleChange(allPages);
+    }
+  }
+
+  first = () => {
+    if (this.hasPrev()) {
+      this.handleChange(1);
+    }
+  }
+
+  hasPrev = () => (this.state.current > 1);
+  hasNext = () => {
+    const {
+      total
+    } = this.props;
+
+    const {
+      current,
+      pageSize
+    } = this.state;
+
+    return current < calculatePage(total, pageSize);
+  };
+
+  /**
+   * Handle page change
+   */
+  handleChange = (p) => {
+    let page = p;
+    if (this.isValid(page)) {
+      if (!('current' in this.props)) {
+        this.setState({
+          current: page
+        })
+      }
+
+      const pageSize = this.state.pageSize;
+      this.props.onChange(page, pageSize);
+
+      return page;
+    }
+
+    return this.state.current;
+  }
+
+  /**
+   * Check page number is valid
+   * @param {number} page
+   * @return {boolean}
+   */
+  isValid = (page) => {
+    return isInteger(page) && page >= 1 && page !== this.state.current;
+  }
+
+  runIfEnter = (event, callback, ...restParams) => {
+    if (event.key === 'Enter' || event.charCode === 13) {
+      callback(...restParams);
+    }
+  }
+
   render() {
     const {
       current,
       pageSize
     } = this.state;
 
+    const {
+      hideOnSinglePage,
+      total,
+      prevTitle,
+      nextTitle,
+      lastTitle,
+      firstTitle,
+      hideEdges,
+      showTotal
+    } = this.props;
+
     // hide pagination on single page, if needed
-    if (this.props.hideOnSinglePage && this.props.total <= this.props.pageSize) {
+    if (hideOnSinglePage && total <= this.props.pageSize) {
       return null;
     }
 
+    const buffer = 2;
     const pagerList = [];
-    const prevItemTitle = (this.props.prevTitle) ? this.props.prevTitle : 'הקודם';
-    const nextItemTitle = (this.props.nextTitle) ? this.props.nextTitle : 'הבא';
-    const allPages = calculatePage(undefined, this.state, this.props);
-    const prevPage = current - 1 > 0 ? current - 1 : 0;
-    const nextPage = current + 1 < allPages ? current + 1 : allPages;
-    const prevItem = <Pager key="prev" page={prevItemTitle} disabled={current === 1} />;
-    const nextItem = <Pager key="next" page={nextItemTitle} disabled={current === allPages - 1} />;
+    const prevItemTitle = (prevTitle) ? prevTitle : 'הקודם';
+    const nextItemTitle = (nextTitle) ? nextTitle : 'הבא';
+    const lastItemTitle = (lastTitle) ? lastTitle : 'אחרון';
+    const firstItemTitle = (firstTitle) ? firstTitle : 'ראשון';
+    const allPages = calculatePage(total, pageSize);
+    let startCount = 1;
+    let endCount = allPages;
+    if (allPages > 5) {
+      startCount = Math.max(1, current - buffer);
+      endCount = Math.min(current + buffer, allPages);
 
-    // TODO: set aria rules
+      if (current - 1 <= buffer) {
+        endCount = 1 + buffer * 2;
+      }
+
+      if (allPages - current <= buffer) {
+        startCount = allPages - buffer * 2;
+      }
+    }
+    const prevItem = (
+      <Pager
+        key="prev"
+        page={prevItemTitle}
+        disabled={current === 1}
+        aria-disabled={current === 1}
+        onClick={this.prev}
+        onKeyPress={this.runIfEnter}
+      />
+    );
+    const nextItem = (
+      <Pager
+        key="next"
+        page={nextItemTitle}
+        disabled={current === allPages}
+        aria-disabled={current === allPages}
+        onClick={this.next}
+        onKeyPress={this.runIfEnter}
+      />
+    );
+    const lastItem = (
+      <Pager
+        key="last"
+        page={lastItemTitle}
+        disabled={current === allPages}
+        aria-disabled={current === allPages}
+        onClick={this.last}
+        onKeyPress={this.runIfEnter}
+      />
+    );
+    const firstItem = (
+      <Pager
+        key="first"
+        page={firstItemTitle}
+        disabled={current === 1}
+        aria-disabled={current === 1}
+        onClick={this.first}
+        onKeyPress={this.runIfEnter}
+      />
+    );
+
+    if (!hideEdges) {
+      pagerList.push(firstItem);
+    }
 
     pagerList.push(prevItem);
 
-    for (let index = 1; index <= allPages; index++) {
+    for (let index = startCount; index <= endCount; index++) {
       const active = current === index;
       pagerList.push(
         <Pager
           key={index}
           page={index}
           active={active}
+          onClick={this.handleChange}
+          onKeyPress={this.runIfEnter}
         />
       )
     }
 
     pagerList.push(nextItem);
 
+    if (!hideEdges) {
+      pagerList.push(lastItem);
+    }
+
+    if (showTotal) {
+      pagerList.push(
+        <Total key="total">
+          {showTotal(
+            total,
+            [
+              (current - 1) * pageSize + 1,
+              current * pageSize > total ? total : current * pageSize
+            ]
+          )}
+        </Total>
+      )
+    }
 
     return (
-      <WithStyle>
+      <WithStyle role="navigation">
         {pagerList}
       </WithStyle>
     )
@@ -85,13 +270,18 @@ Pagination.propTypes = {
   current: PropTypes.number,
   total: PropTypes.number,
   pageSize: PropTypes.number,
-  showTotal: PropTypes.func,
-  hideOnSinglePage: PropTypes.bool
+  hideOnSinglePage: PropTypes.bool,
+  hideEdges: PropTypes.bool,
+  showTotal: PropTypes.func
 }
+
 
 Pagination.defaultProps = {
   pageSize: 10,
-  hideOnSinglePage: false
+  hideOnSinglePage: false,
+  onChange: noop,
+  defaultCurrent: 1,
+  total: 0
 }
 
 export default Pagination;

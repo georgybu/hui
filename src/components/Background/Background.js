@@ -4,7 +4,7 @@ import WithStyle from './Background.style';
 
 const Background = ({active}) => {
 
-  const visible = ((typeof active == 'undefined') || active == true) ? true : false;
+  const visible = ((typeof active == 'undefined') || active == true);
 
   return (
     (visible)

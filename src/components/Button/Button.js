@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { isChildrenNil } from '../../utils';
 import WithStyle from './Button.style';
@@ -19,11 +19,11 @@ const getTabIndex = (disabled, tabIndex) => {
 
 const Button = (props) => {
   const {
-    disabled, 
-    children, 
-    content, 
-    href, 
-    tabIndex, 
+    disabled,
+    children,
+    content,
+    href,
+    tabIndex,
     role
   } = props;
 

@@ -2,7 +2,7 @@
 const spacingUnit = 8;
 
 const theme = {
-  cdn: 'http://www.harel-net.co.il/files/hsg',
+  cdn: 'https://new.harel-net.co.il/files/hsg',
 
   spacing: {
     xsmall: `${spacingUnit * 0.5}px`,
@@ -52,7 +52,10 @@ const theme = {
   },
 
   zindex: {
-    background: -999
+    background: -99,
+    overlay: 9,
+    overlay: 100,
+    loader: 110
   }
 }
 

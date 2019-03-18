@@ -11,6 +11,8 @@ import {
   Background
 } from 'hui';
 
+import Shimi from './components/Shimi';
+
 export default class App extends Component {
   render () {
     return (
@@ -18,8 +20,16 @@ export default class App extends Component {
         <Background/>
         <Top />
         <Container global>
-          <Head>כותרת הדף</Head>
-          <Grid direction="col">
+          <Head>משיכת כספים מקרן השתלמות</Head>
+          <Panel type="light">
+            <h2 className="u-c2 u-light">רגע לפני שמושכים</h2>
+            <p>
+              בסרטון, שתועד על ידי אחד הלוחמים ונחשב ל"ראיית הזהב" נגדם, נראה החלק החמור פחות במסכת האלימות שספגו העצורים הכפותים ומכוסי העיניים: הלוחמים נשמעים צוחקים, קוראים קריאות שמחה, מאזינים למוזיקה בחלק האחורי של רכב הזאב הגדול ומדי פעם מכים בסטירות את ראשי שני העצורים, אב ובנו. זעקות הכאב של העצורים נשמעו אף הן לאורך הסרטון.
+            </p>
+
+          </Panel>
+
+          {/* <Grid direction="col">
             <Grid.Column>
               <Panel type="dark">
                 טופס מסננים
@@ -27,10 +37,10 @@ export default class App extends Component {
             </Grid.Column>
             <Grid.Column>
               <Panel type="light">
-                  טבלת תוצאות
+                  <Shimi></Shimi>
               </Panel>
             </Grid.Column>
-          </Grid>
+          </Grid> */}
         </Container>
       </HsgProvider>
     )

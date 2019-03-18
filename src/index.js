@@ -12,9 +12,11 @@ export { default as Textarea } from './components/Textarea';
 export { default as Background } from './components/Background';
 export { default as Panel } from './components/Panel';
 export { default as Pagination } from './components/Pagination';
-
-export { IconLink } from './components/Icon/Link';
-export { IconPhone } from './components/Icon/Phone';
-export { IconTimer } from './components/Icon/Timer';
-export { IconSave } from './components/Icon/Save';
-export { IconReload } from './components/Icon/Reload';
+export { default as Icon } from './components/Icon';
+export { default as Label } from './components/Label';
+export { default as Table } from './components/Table';
+export { default as Select } from './components/Select';
+export { default as Overlay } from './components/Overlay';
+export { default as Radio } from './components/Radio';
+export { default as Checkbox } from './components/Checkbox';
+export { default as Modal } from './components/Modal';

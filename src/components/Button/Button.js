@@ -24,7 +24,9 @@ const Button = (props) => {
     content,
     href,
     tabIndex,
-    role
+    role,
+    htmlType
+
   } = props;
 
   const elementType = getElementType(href);
@@ -35,7 +37,8 @@ const Button = (props) => {
     as: elementType,
     disabled: (disabled && elementType === 'button'),
     tabIndex: elementTabIndex,
-    role: elementRole
+    role: elementRole,
+    type: htmlType
   })
 
   return (
@@ -58,7 +61,12 @@ Button.propTypes = {
   loading: PropTypes.bool,
   role: PropTypes.string,
   tabIndex: PropTypes.number,
-  size: PropTypes.oneOf(['small', 'medium', 'large'])
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  htmlType: PropTypes.oneOf(['submit', 'button', 'reset'])
+}
+
+Button.defaultProps = {
+  htmlType: 'button'
 }
 
 

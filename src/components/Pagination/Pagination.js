@@ -103,14 +103,16 @@ class Pagination extends Component {
    */
   handleChange = (p) => {
     let page = p;
+    const { total } = this.props;
+    const { pageSize } = this.state;
+
     if (this.isValid(page)) {
-      if (!('current' in this.props)) {
-        this.setState({
-          current: page
-        })
+      const currentPage = calculatePage(total, pageSize);
+      if (page > currentPage) {
+        page= currentPage;
       }
 
-      const pageSize = this.state.pageSize;
+      this.setState({ current: page });
       this.props.onChange(page, pageSize);
 
       return page;
@@ -148,7 +150,8 @@ class Pagination extends Component {
       lastTitle,
       firstTitle,
       hideEdges,
-      showTotal
+      showTotal,
+      ...rest
     } = this.props;
 
     // hide pagination on single page, if needed
@@ -165,6 +168,7 @@ class Pagination extends Component {
     const allPages = calculatePage(total, pageSize);
     let startCount = 1;
     let endCount = allPages;
+
     if (allPages > 5) {
       startCount = Math.max(1, current - buffer);
       endCount = Math.min(current + buffer, allPages);
@@ -177,6 +181,7 @@ class Pagination extends Component {
         startCount = allPages - buffer * 2;
       }
     }
+
     const prevItem = (
       <Pager
         key="prev"
@@ -187,6 +192,7 @@ class Pagination extends Component {
         onKeyPress={this.runIfEnter}
       />
     );
+
     const nextItem = (
       <Pager
         key="next"
@@ -197,6 +203,7 @@ class Pagination extends Component {
         onKeyPress={this.runIfEnter}
       />
     );
+
     const lastItem = (
       <Pager
         key="last"
@@ -207,6 +214,7 @@ class Pagination extends Component {
         onKeyPress={this.runIfEnter}
       />
     );
+
     const firstItem = (
       <Pager
         key="first"
@@ -257,11 +265,11 @@ class Pagination extends Component {
       )
     }
 
-    return (
-      <WithStyle role="navigation">
+    return (allPages > 0) ? (
+      <WithStyle {...rest} role="navigation">
         {pagerList}
       </WithStyle>
-    )
+    ) : null;
   }
 }
 

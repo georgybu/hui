@@ -1,9 +1,11 @@
 import React from 'react';
-import WithStyle from './Input.style';
+import WithStyle from './Group.style';
 
 
-const Group = (props) => {
-  <WithStyle></WithStyle>
-}
+const Group = ({children}) => (
+  <WithStyle>
+    {children}
+  </WithStyle>
+)
 
 export default Group;

@@ -11,7 +11,7 @@ const Style = styled.div`
 	right: 0;
 
 	@media (min-width: ${props => props.theme.breakpoints.small}) {
-		background-image: url('https://hsgfw-10141.firebaseapp.com/assets/images/bg.jpg');
+		background-image: url('${props => props.theme.cdn}/images/bg.jpg');
 	}
 `;
 

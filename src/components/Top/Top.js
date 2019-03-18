@@ -20,9 +20,9 @@ const Top = props => {
   )
 }
 
-// Top.propTypes = {
-//   url: customPropTypes.url
-// }
+Top.propTypes = {
+  url: customPropTypes.url
+}
 
 Top.defaultProps = {
   showLogo: true,

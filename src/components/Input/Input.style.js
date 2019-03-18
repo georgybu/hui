@@ -3,14 +3,15 @@ import styled from 'styled-components';
 
 const variables = {
   color: {
-    normal: 'rgba(0,0,0,0.65)',
+    normal: 'rgba(0,0,0,0.60)',
     placeholder: '#bfbfbf'
   },
   border: {
     color: {
       normal: '#d9d9d9',
       hover: '#40a9ff',
-      focus: '#40a9ff'
+      focus: '#40a9ff',
+      invalid: (props) => props.theme.colors.danger
     }
   },
   background: {
@@ -24,30 +25,34 @@ const variables = {
 const Style = styled.input`
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
   list-style: none;
   position: relative;
   display: inline-block;
-  padding: 6px 12px;
+  padding: 6px;
   width: 100%;
   height: 40px;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.5;
   color: ${variables.color.normal};
-  background-color: ${variables.background.color.color};
+  background-color: ${variables.background.color.normal};
   background-image: none;
   border: 1px solid ${variables.border.color.normal};
   border-radius: 0;
   transition: all .3s;
+  z-index: 1;
+  border-color: ${props => (props.invalid) ? variables.border.color.invalid : null};
+
+  padding-right: ${props => (props.hasPrefix) ? '30px' : null};
+  padding-left: ${props => (props.hasSuffix) ? '30px' : null};
 
   &:hover:not(:disabled) {
-    border-color: ${variables.border.color.hover};
+    border-color: ${props => (!props.invalid) ? variables.border.color.hover : null};
   }
 
   &:focus {
-    border-color: ${variables.border.color.focus};
+    border-color: ${props => (props.invalid) ? variables.border.color.invalid : variables.border.color.focus};
     outline: 0;
-    box-shadow: 0 0 0 2px rgba(24,144,255,0.2);
+    box-shadow: 0 0 0 2px ${props => (props.invalid) ? 'rgba(245, 34, 45, 0.2)' : 'rgba(24,144,255,0.2)'};
   }
 
   &::-moz-placeholder {

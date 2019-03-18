@@ -46,7 +46,7 @@ const Style = styled.div`
   left: ${props => (!props.inline) ? '50%': null};
   margin: 0;
   text-align: center;
-  z-index: 100;
+  z-index: ${props => props.theme.zindex.loader};
   transform: ${props => (!props.inline) ? 'translateX(-50%) translateY(-50%)': null};
   min-width: ${props => variables.size[props.size].dimensions}em;
   min-height: ${props => variables.size[props.size].dimensions}em;

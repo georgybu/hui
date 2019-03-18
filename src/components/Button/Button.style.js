@@ -1,17 +1,19 @@
 import styled, { keyframes, css } from 'styled-components';
 
+//TODO: simplify button style code
+
 const variables = {
   normal: {
-    background: '#eaeaea',
+    background: 'transparent',
     color: (props) => props.theme.colors.base,
-    hoverBackground: '#cacbcd',
+    hoverBackground: '#fff',
     focusBorderColor: '#ccc',
     activeBackground: '#babbbc'
-  }, 
+  },
 
   disabled: {
-    background: '#e7e7e7',
-    color: '#666'
+    background: '#f5f5f5',
+    color: 'rgba(0,0,0,0.25)'
   },
 
   primary: {
@@ -20,9 +22,10 @@ const variables = {
     hoverBackground: '#1678c2',
     focusBorderColor: '#176dad',
     activeBackground: '#1a69a4'
-  }, 
+  },
 
   danger: {
+    background: '#f5f5f5',
     color: (props) => props.theme.colors.danger,
     hoverBackground: '#d01919',
     focusBorderColor: '#ca1010',
@@ -30,7 +33,7 @@ const variables = {
   },
 
   fontFamily: (props) => props.theme.font.family,
-  padding: '0.8em 1.5em',
+  padding: '0.7em 1.3em',
   fontSize: {
     small: '.8rem',
     medium: '1rem',
@@ -92,30 +95,29 @@ const Style = styled.button`
   width: ${props => (props.fluid) ? '100%' : null};
   min-height: 1em;
   outline: none;
-  border: none;
+  border: 1px solid transparent;
   border-radius: 0;
   vertical-align: baseline;
-  background-color: ${props => (props.primary) ? variables.primary.background : variables.normal.background};  
-	color: ${props => 
+  background-color: ${props => (props.primary) ? variables.primary.background : variables.normal.background};
+	color: ${props =>
     ((!props.primary && !props.danger) && variables.normal.color) ||
     (props.primary && variables.primary.color) ||
     (props.danger && variables.danger.color)
   };
 	font-family: ${variables.fontFamily};
-  margin: 0;
+  margin: ${props => props.theme.spacing.xsmall};
   padding: ${variables.padding};
   user-select: none;
 	text-decoration: none;
 	text-align: center;
   font-style: normal;
   line-height: 1em;
-	font-size: ${props => 
+	font-size: ${props =>
     ((props.size === 'medium' || !props.size) && variables.fontSize.medium) ||
     (props.size === 'large' && variables.fontSize.large) ||
     (props.size === 'small' && variables.fontSize.small)
   };
-  
-  ${variables.fontSize.medium};
+  border-color: ${props => !props.danger && !props.primary ? '#d9d9d9' : null};
   text-transform: none;
   transition: outline .1s ease, opacity .1s ease, background-color .1s ease;
 
@@ -126,7 +128,7 @@ const Style = styled.button`
 
   // State: hover
   &:hover:not(:disabled) {
-    background-color: ${props => 
+    background-color: ${props =>
       ((!props.primary && !props.danger) && variables.normal.hoverBackground) ||
       (props.primary && variables.primary.hoverBackground) ||
       (props.danger && variables.danger.hoverBackground)
@@ -136,7 +138,7 @@ const Style = styled.button`
 
   // State: focus
   &:focus:not(:disabled) {
-    outline: 1px solid ${props => 
+    outline: 1px solid ${props =>
       ((!props.primary && !props.danger) && variables.normal.focusBorderColor) ||
       (props.primary && variables.primary.focusBorderColor) ||
       (props.danger && variables.danger.focusBorderColor)
@@ -145,7 +147,7 @@ const Style = styled.button`
 
   // State: active
   &:active:not(:disabled) {
-    background-color: ${props => 
+    background-color: ${props =>
       ((!props.primary && !props.danger) && variables.normal.activeBackground) ||
       (props.primary && variables.primary.activeBackground) ||
       (props.danger && variables.danger.activeBackground)
@@ -157,6 +159,8 @@ const Style = styled.button`
   &:disabled {
 		opacity: 0.5;
 		cursor: not-allowed;
+    border-color: #d9d9d9;
+    background-color: #f5f5f5;
   }
 
   ${props => (props.loading ? css`${loading}` : null)}

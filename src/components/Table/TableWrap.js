@@ -1,9 +1,9 @@
 import React from 'react';
 import WithStyle from './TableWrap.style';
 
-function TableWrap({children}) {
+function TableWrap({children, direction}) {
   return (
-    <WithStyle>
+    <WithStyle direction={direction}>
       {children}
     </WithStyle>
   )

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { isChildrenNil } from '../../utils';
 import WithStyle from './Button.style';
+import ButtonGroup from './ButtonGroup';
 
 
 const getButtonAriaRole = (ElementType, role) => {
@@ -66,8 +67,12 @@ Button.propTypes = {
 }
 
 Button.defaultProps = {
-  htmlType: 'button'
+  htmlType: 'button',
+  size: 'medium',
+  role: 'button'
 }
+
+Button.Group = ButtonGroup;
 
 
 export default Button;

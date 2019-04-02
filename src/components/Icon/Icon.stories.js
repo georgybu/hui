@@ -356,6 +356,7 @@ storiesOf('Icon', module)
       <Grid.Column style={{textAlign: 'center'}}><Box title="large"><Icon name="phone" size="large" /></Box></Grid.Column>
       <Grid.Column style={{textAlign: 'center'}}><Box title="xlarge"><Icon name="phone" size="xlarge" /></Box></Grid.Column>
       <Grid.Column style={{textAlign: 'center'}}><Box title="xxlarge"><Icon name="phone" size="xxlarge" /></Box></Grid.Column>
+      <Grid.Column style={{textAlign: 'center'}}><Box title="140px"><Icon name="phone" size="140px" /></Box></Grid.Column>
     </Grid>
   ))
   .add('color', () => (

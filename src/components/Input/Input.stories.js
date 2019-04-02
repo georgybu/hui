@@ -1,6 +1,45 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { Input, Grid, Icon, Button } from '../../index';
+
+
+
+class InputInvalidExample extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      invalid: false,
+      explain: null,
+      value: 'שלום'
+    }
+  }
+
+  onchange = (e) => {
+    const { value } = e.target;
+
+    this.setState({
+      invalid: !!!value.length,
+      explain: 'יש צורך בהזנת שם מלא',
+      value
+    })
+  }
+
+  render() {
+
+    return (
+      <div>
+        <Input invalid={this.state.invalid} defaultValue="שלום" onChange={this.onchange} placeholder="שם מלא" explain={this.state.explain} />
+        <br/>
+        {this.state.value}
+      </div>
+    )
+  }
+}
+
+
+
+
 
 let inputref;
 
@@ -14,16 +53,19 @@ function blurInput(e) {
 
 function change(e) {
   const { value } = e.target;
-  console.log(e);
-  console.log('value:', value);
+  // console.log(e);
+  // console.log('value:', value);
 }
 
 storiesOf('Input', module)
   .add('default', () => (
     <Fragment>
-      <Grid col={6}>
+      <Grid col={4}>
         <Grid.Column>
-          <Input onChange={change} />
+          <Input onChange={change} defaultValue="defaultValue" />
+        </Grid.Column>
+        <Grid.Column>
+          <Input onChange={change} value="value" />
         </Grid.Column>
         <Grid.Column>
           <Input placeholder="ממלא מקום" />
@@ -57,10 +99,10 @@ storiesOf('Input', module)
     <Fragment>
       <Grid col={6}>
         <Grid.Column>
-          <Input label="טלפון" id="phone" addonBefore="https://" addonAfter="co.il" defaultValue="www.harel-group.co.il" />
+          <Input label="כתובת אתר" id="phone" addonBefore="https://" addonAfter="co.il" defaultValue="www.harel-group.co.il" />
         </Grid.Column>
         <Grid.Column>
-          <Input addonAfter="₪" placeholder="סכום בשקלים" />
+          <Input label="סכום ביטוח" addonAfter="₪" placeholder="סכום בשקלים" />
         </Grid.Column>
         <Grid.Column>
           <Input addonBefore={<Icon name="phone" />} placeholder="טלפון לקוח" />
@@ -104,7 +146,7 @@ storiesOf('Input', module)
           <Input invalid placeholder="דואר אלקטרוני" />
         </Grid.Column>
         <Grid.Column>
-          <Input invalid placeholder="שם מלא" explain="יש צורך בהזנת שם מלא" />
+          <InputInvalidExample />
         </Grid.Column>
       </Grid>
     </Fragment>

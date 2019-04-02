@@ -1,6 +1,7 @@
 import React, { Component, createRef, findDom } from 'react';
 import PropTypes from 'prop-types';
 import LabelWithStyle from './Checkbox.style';
+import { isChildrenNil } from '../../utils';
 
 function noop() {}
 
@@ -51,6 +52,10 @@ class Checkbox extends Component {
     this.input.blur();
   }
 
+  /**
+   * handle change
+   * @param e Event
+   */
   handleChange = (e) => {
     const {
       disabled,
@@ -61,7 +66,7 @@ class Checkbox extends Component {
       return;
     }
 
-      if (!('checked' in this.props)) {
+    if (!('checked' in this.props)) {
       this.setState({
         checked: e.target.checked
       })
@@ -111,11 +116,14 @@ class Checkbox extends Component {
       return prev;
     }, {});
 
+    const hasChildren = !isChildrenNil(children);
+
     return (
       <LabelWithStyle
         className={className}
         style={style}
         htmlFor={id}
+        hasChildren={hasChildren}
       >
         <input
           name={name}
@@ -132,18 +140,41 @@ class Checkbox extends Component {
           ref={this.saveInput}
           {...globalProps}
         />
-        {children !== undefined && <span>{children}</span>}
+        <span>{children}</span>
       </LabelWithStyle>
     )
   }
 }
 
 Checkbox.propTypes = {
+  /**
+   * get focus when component mounted
+   */
   autoFocus: PropTypes.bool,
+
+  /**
+   * specifies whether the checkbox is selected
+   */
   checked: PropTypes.bool,
+
+  /**
+   * indeterminate checked state of checkbox
+   */
   indeterminate: PropTypes.bool,
+
+  /**
+   * specifies the initial state: whether or not the checkbox is selected
+   */
   defaultChecked: PropTypes.bool,
+
+  /**
+   * disable checkbox
+   */
   disabled: PropTypes.bool,
+
+  /**
+   * The callback function that is triggered when the state changes
+   */
   onChange: PropTypes.func
 }
 

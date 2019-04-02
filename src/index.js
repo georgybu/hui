@@ -20,3 +20,4 @@ export { default as Overlay } from './components/Overlay';
 export { default as Radio } from './components/Radio';
 export { default as Checkbox } from './components/Checkbox';
 export { default as Modal } from './components/Modal';
+export { default as Divider } from './components/Divider';

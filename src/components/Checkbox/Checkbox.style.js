@@ -10,7 +10,7 @@ const Style = styled.label`
   list-style: none;
   position: relative;
   display: inline-block;
-  margin-left: ${props => props.theme.spacing.medium};
+  margin-left: ${props => props.hasChildren ? props.theme.spacing.medium : null};
   cursor: pointer;
   -webkit-appearance: none;
 
@@ -82,6 +82,7 @@ const Style = styled.label`
   & > span {
     padding-right: calc(${props => props.theme.spacing.xsmall} + 16px);
     display: table;
+    min-height: 22px;
 
     &:before {
       content: "";

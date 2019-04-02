@@ -15,8 +15,8 @@ const Loader = (props) => {
 
   const variables = {
     className,
-    inline, 
-    inverted, 
+    inline,
+    inverted,
     size,
     children: children || content || null
   };

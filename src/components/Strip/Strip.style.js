@@ -14,6 +14,10 @@ const style = styled.div`
   @media (max-width: ${(props) => props.theme.breakpoints.medium}) {
     flex-direction: column;
   }
+
+  &:not(:last-child) {
+    margin-bottom: ${(props) => props.theme.spacing.small};
+  }
 `;
 
 export default style;

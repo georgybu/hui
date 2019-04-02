@@ -1,6 +1,6 @@
 import React from 'react';
-import WithStyle from './Background.style';
-
+import DivWithStyle from './Background.style';
+import PropTypes from 'prop-types';
 
 const Background = ({active}) => {
 
@@ -8,9 +8,20 @@ const Background = ({active}) => {
 
   return (
     (visible)
-    ? <WithStyle />
+    ? <DivWithStyle />
     : null
   )
+}
+
+Background.propTypes = {
+  /**
+   * whether or not show the background image itself
+   */
+  active: PropTypes.bool
+}
+
+Background.defaultProps = {
+  active: true
 }
 
 export default Background;

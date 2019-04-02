@@ -12,7 +12,7 @@ const utilityStyle = `
   Name: Utility
   Description: Defines utility classes for global style
 
-  Component: TODO: fill this
+  Component:
   .u-m* - margin
   .u-p* - padding
   .u-d-* - display

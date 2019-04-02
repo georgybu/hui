@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import WithStyle from './Icon.style';
+import SpanWithStyle from './Icon.style';
+import { isObject } from '../../utils';
 
+// TODO: change to axios ?!
+// TODO: handle failure
+// TODO: add fallback and image not loaded
 
 const getSvgData = (str) => {
   const parser = new DOMParser();
@@ -24,7 +28,7 @@ class Icon extends Component {
   constructor(props) {
     super(props);
 
-    this.url = `http://www.harel-net.co.il/files/hsg/images/icons/${props.name}.svg`;
+    this.url = `https://new.harel-net.co.il/files/hsg/images/icons/${props.name}.svg`;
 
     this.state = {
       isLoaded: false,
@@ -60,11 +64,7 @@ class Icon extends Component {
   }
 
   renderImage() {
-    return (
-      <WithStyle {...this.props}>
-        <img src={this.url} role="presentation" />
-      </WithStyle>
-    );
+    return <img src={this.url} role="presentation" />;
   }
 
   renderSvg() {
@@ -75,25 +75,33 @@ class Icon extends Component {
       content
     } = this.state;
 
+    let image = null;
+
     if (isLoaded) {
       data = getSvgData(content);
-
-      return (
-        <WithStyle {...this.props}>
-          <svg viewBox={`0 0 ${data.width} ${data.height}`} dangerouslySetInnerHTML={{ __html: data.content}} role="presentation" />
-        </WithStyle>
-      )
-    } else {
-      return null;
+      image = <svg
+          viewBox={`0 0 ${data.width} ${data.height}`}
+          dangerouslySetInnerHTML={{ __html: data.content}}
+          role="presentation"
+          aria-hidden="true"
+        />;
     }
+
+    return image;
   }
 
   render() {
-    if (this.isImage()) {
-      return this.renderImage();
-    } else {
-      return this.renderSvg();
-    }
+    const {
+      size
+    } = this.props;
+
+    const image = this.isImage() ? this.renderImage() : this.renderSvg();
+
+    return (
+      <SpanWithStyle size={size}>
+        {image}
+      </SpanWithStyle>
+    )
   }
 }
 
@@ -102,6 +110,10 @@ Icon.propTypes = {
   type: PropTypes.string,
   size: PropTypes.string,
   color: PropTypes.string
+}
+
+Icon.defaultProps = {
+  size: 'medium'
 }
 
 

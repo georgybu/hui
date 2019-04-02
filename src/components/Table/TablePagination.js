@@ -1,6 +1,6 @@
 import React from 'react';
 import Pagination from '../Pagination';
-import { omit, isObject } from '../../utils/misc';
+import { omit, isObject } from '../../utils';
 
 
 function buildPagination(props) {

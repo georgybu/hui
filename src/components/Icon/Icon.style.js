@@ -18,16 +18,21 @@ const Style = styled.span`
 
   font-size: ${props =>
     (props.size === 'small' && '0.8em') ||
-    ((props.size === 'medium' || !props.size) && '1em') ||
+    ((props.size === 'medium') && '1em') ||
     (props.size === 'large' && '2em') ||
     (props.size === 'xlarge' && '3em') ||
-    (props.size === 'xxlarge' && '5em')
+    (props.size === 'xxlarge' && '5em') ||
+    (props.size)
   };
 
   & > img,
   & > svg  {
     height: 1em;
     width: 1em;
+  }
+
+  & > svg {
+    fill: currentColor;
   }
 `;
 

@@ -7,7 +7,6 @@ const Style = styled.thead`
 
     & > th {
       padding: ${props => props.theme.spacing.medium} ${props => props.theme.spacing.medium};
-      text-align: right;
       color: rgba(0,0,0,0.85);
       transition: background .3s ease;
       background: #fafafa;

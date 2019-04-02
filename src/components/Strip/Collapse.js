@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import WithStyle from './Collapse.style';
+import ButtonWithStyle from './Collapse.style';
 
 
 class Collapse extends Component {
@@ -17,8 +17,8 @@ class Collapse extends Component {
     } = this.props;
 
     return (collapse)
-      ? <WithStyle 
-          type="button" 
+      ? <ButtonWithStyle
+          type="button"
           {...this.props}
           aria-label={this.state.buttonLabel}
         />

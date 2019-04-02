@@ -1,6 +1,6 @@
 import React, { Component, createRef, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import WithStyle from './Input.style';
+import InputWithStyle from './Input.style';
 import Group from './Group';
 import Wrap from './Wrap';
 import Addon from './Addon';
@@ -8,6 +8,7 @@ import Affix from './Affix';
 import Info from './Info';
 import Icon from '../Icon';
 import Label from '../Label';
+import { omit } from '../../utils';
 
 
 function fixControlledValue(value) {
@@ -39,9 +40,7 @@ class Input extends Component {
   }
 
   setValue = (value, e) => {
-    if (!('value' in this.props)) {
-      this.setState({value});
-    }
+    this.setState({value});
 
     const {
       onChange
@@ -50,7 +49,6 @@ class Input extends Component {
     if (onChange) {
       let event = e;
 
-      // TODO: check this...
       if (e.type === 'click') {
         event = Object.create(e);
         event.target = this.input;
@@ -163,14 +161,15 @@ class Input extends Component {
   renderInfo() {
     const {
       explain,
-      info
+      info,
+      invalid
     } = this.props;
 
     if (!explain && !info) {
       return null;
     }
 
-    const explainComponent = (explain) ? <Info danger>{explain}</Info> : null;
+    const explainComponent = (explain) ? <Info danger invalid={invalid}>{explain}</Info> : null;
     const infoComponent = (info) ? <Info>{info}</Info> : null;
 
     return (
@@ -209,9 +208,11 @@ class Input extends Component {
       ...rest
     } = this.props;
 
+    const restProps = omit(rest, ['defaultValue']);
+
     return (
-      <WithStyle
-        {...rest}
+      <InputWithStyle
+        {...restProps}
         id={id}
         value={fixControlledValue(this.state.value)}
         maxLength={maxLength}

@@ -1,14 +1,13 @@
 import React from 'react';
 import { isChildrenNil } from '../../utils';
+import DivWithStyle from './Body.style';
 
 
 const Body = ({children, content, close}) => {
-  const hasChildren = !isChildrenNil(children);
+  const text = !isChildrenNil(children) ? children : content;
 
   return (
-    (!close)
-    ? <div>{(hasChildren) ? children : content}</div>
-    : null
+    <DivWithStyle close={close}>{text}</DivWithStyle>
   )
 }
 

@@ -7,8 +7,11 @@ const Style = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1000;
+  z-index: ${props => props.theme.zindex.modal};
   overflow: auto;
   outline: 0;
   -webkit-overflow-scrolling: touch;
+  direction: rtl;
 `;
+
+export default Style;

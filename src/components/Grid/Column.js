@@ -6,12 +6,26 @@ const Column = (props) => (
   <WithStyle {...props} />
 )
 
-Column.prototypes = {
+Column.propTypes = {
+  /**
+   * number of cells (12 total in row) specific column occupy
+   */
+  col: PropTypes.number,
+
+  /**
+   * ≥518px, number of cells the specific column occupy
+   */
   sm: PropTypes.number,
+
+  /**
+   * ≥765px, number of cells the specific column occupy
+   */
   md: PropTypes.number,
-  lg: PropTypes.number,
-  rest: PropTypes.number,
-  size: PropTypes.number
+
+  /**
+   * ≥1013px, number of cells the specific column occupy
+   */
+  lg: PropTypes.number
 }
 
 export default Column;

@@ -9,7 +9,6 @@ import { isInteger } from '../../utils';
 function noop() {}
 
 
-
 /**
  * Calculate total number of pages
  * @param {number} total
@@ -19,23 +18,6 @@ function noop() {}
 const calculatePage = (total, pageSize) => {
   return Math.floor((total - 1) / pageSize) + 1;
 }
-
-
-/**
- * TODO: change this function to recieve only the needed data and not all object(?!)
- * Calculate total number of pages
- * @param {number} pageSize
- * @param {object} state
- * @param {object} props
- * @return {number}
- */
-// const calculatePage = (pageSize, state, props) => {
-//   if (typeof pageSize === 'undefined') {
-//     pageSize = state.pageSize;
-//   }
-
-//   return Math.floor((props.total - 1) / pageSize) + 1;
-// }
 
 
 class Pagination extends Component {

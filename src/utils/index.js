@@ -1,5 +1,9 @@
 import * as customPropTypes from './customPropTypes';
+import keyCode from './keycode';
+import calculateNodeHeight from './calculateNodeHeight';
 
-export { isInteger } from './MathUtils';
+export { omit, isObject, isInteger } from './misc';
+export { contains } from './dom';
 export { isChildrenNil } from './childrenUtils';
-export { customPropTypes };
+export { keyCode, calculateNodeHeight, customPropTypes };
+

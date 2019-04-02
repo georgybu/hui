@@ -20,6 +20,7 @@ class Strip extends Component {
     }
   }
 
+
   handleButtonClick = () => {
     this.setState(state => ({
       stripClose: !state.stripClose
@@ -49,17 +50,17 @@ class Strip extends Component {
     return (
       <WithStyle>
         <Collapse collapse={collapse} close={stripClose} onClick={this.handleButtonClick} />
-        
+
         <Side {...type} isSpecial={isSpecial}>
           <Title isSpecial={isSpecial} title={title} />
           <Subtitle subtitle={subtitle} />
         </Side>
 
         <Content>
-          <Head header={header}>
+          <Head header={header} close={stripClose}>
             <Headtitle>{header}</Headtitle>
           </Head>
-          <Body close={stripClose} children={children} content={content} />
+          <Body hasHead={!!header} close={stripClose} children={children} content={content} />
         </Content>
       </WithStyle>
     )
@@ -68,11 +69,34 @@ class Strip extends Component {
 
 
 Strip.propTypes = {
+  /**
+   * title display on side
+   */
   title: PropTypes.string.isRequired,
+
+  /**
+   * subtitle display on side
+   */
   subtitle: PropTypes.string,
+
+  /**
+   * header title display on content
+   */
   header: PropTypes.node,
+
+  /**
+   * whether the strip will be able to collapse to content body
+   */
   collapse: PropTypes.bool,
+
+  /**
+   * start as closed strip. only available if the strip can collapse
+   */
   close: PropTypes.bool,
+
+  /**
+   * strip content. can replace the need for children
+   */
   content: PropTypes.node
 }
 

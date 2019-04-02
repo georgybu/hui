@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-const Container = ({children, global}) => {
+const Container = ({children}) => {
   const classes = `u-wrap ${(global ? 'u-mt-s' : null)}`;
 
   return (

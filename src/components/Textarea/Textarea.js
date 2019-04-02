@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import WithStyle from './Textarea.style';
-import { isChildrenNil } from '../../utils';
-import calculateNodeHeight from '../../utils/calculateNodeHeight';
+import TextareaWithStyle from './Textarea.style';
+import { isChildrenNil, calculateNodeHeight } from '../../utils';
 import PropTypes from 'prop-types';
 import Label from '../Label';
+import { omit } from '../../utils';
 
 
 function fixControlledValue(value) {
@@ -116,11 +116,12 @@ class Textarea extends Component {
     } = this.props;
 
     const label = this.renderLabel();
+    const restProps = omit(rest, ['defaultValue']);
 
     return (
       <Fragment>
         {label}
-        <WithStyle
+        <TextareaWithStyle
           id={id}
           aria-required={required}
           value={fixControlledValue(this.state.value)}
@@ -130,7 +131,7 @@ class Textarea extends Component {
           onChange={this.handleTextareaChange}
           ref={this.saveTextAreaRef}
           style={this.state.textareaStyles}
-          {...rest}
+          {...restProps}
         />
       </Fragment>
     )

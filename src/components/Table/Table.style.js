@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const Style = styled.table`
   width: 100%;
-  text-align: right;
   border-radius: 0;
   border-collapse: collapse;
 

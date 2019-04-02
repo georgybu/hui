@@ -57,7 +57,8 @@ class Table extends Component {
       bordered,
       loading,
       rowKey,
-      foot
+      foot,
+      direction
     } = this.props;
 
     const {
@@ -74,7 +75,7 @@ class Table extends Component {
     }
 
     return (
-      <TableWrap>
+      <TableWrap direction={direction}>
         <TableLoading active={loading} />
         <TableWithStyle bordered={bordered} summary={summary}>
           <Caption>{caption}</Caption>

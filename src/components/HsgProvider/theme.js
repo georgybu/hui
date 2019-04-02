@@ -55,7 +55,8 @@ const theme = {
     background: -99,
     overlay: 9,
     overlay: 100,
-    loader: 110
+    loader: 110,
+    modal: 110
   }
 }
 

@@ -64,7 +64,22 @@ Grid.propTypes = {
   /**
    * ≥1013px, number of cells each column in the grid row occupy
    */
-  lg: PropTypes.number
+  lg: PropTypes.number,
+
+  /**
+   * flex direction
+   */
+  direction: PropTypes.oneOf(['row', 'col', 'colreverse', 'rowreverse']),
+
+  /**
+   * flex justify content
+   */
+  justify: PropTypes.oneOf(['between', 'around', 'center']),
+
+  /**
+   * flex child elements vertically aligned
+   */
+  align: PropTypes.oneOf(['center', 'bottom']),
 }
 
 Grid.defaultProps = {

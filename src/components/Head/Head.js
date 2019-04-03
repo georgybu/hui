@@ -27,8 +27,19 @@ const Head = props => {
 }
 
 Head.propTypes = {
-  title: PropTypes.string,
+  /**
+   * page head title
+   */
+  title: PropTypes.string.isRequired,
+
+  /**
+   * page head subtitle
+   */
   subtitle: PropTypes.string,
+
+  /**
+   * page head pdf icon url
+   */
   pdfUrl: customPropTypes.url
 }
 

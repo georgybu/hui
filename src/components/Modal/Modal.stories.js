@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { Modal, Button } from '../../index';
+import Story from '../../../.storybook/components/Story';
 
 
 class ModalExample extends Component {
@@ -32,11 +33,6 @@ class ModalExample extends Component {
     return (
       <Fragment>
         <Button onClick={this.showModal}>open modal</Button>
-        <p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p><p>zqas qs xqwd cqwdc ergb rthnty</p><p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p><p>zqas qs xqwd cqwdc ergb rthnty</p><p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p><p>zqas qs xqwd cqwdc ergb rthnty</p><p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p>
-        <p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p><p>zqas qs xqwd cqwdc ergb rthnty</p><p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p><p>zqas qs xqwd cqwdc ergb rthnty</p><p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p><p>zqas qs xqwd cqwdc ergb rthnty</p><p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p>
-        <p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p><p>zqas qs xqwd cqwdc ergb rthnty</p><p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p><p>zqas qs xqwd cqwdc ergb rthnty</p><p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p><p>zqas qs xqwd cqwdc ergb rthnty</p><p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p>
-        <p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p><p>zqas qs xqwd cqwdc ergb rthnty</p><p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p><p>zqas qs xqwd cqwdc ergb rthnty</p><p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p><p>zqas qs xqwd cqwdc ergb rthnty</p><p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p>
-        <p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p><p>zqas qs xqwd cqwdc ergb rthnty</p><p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p><p>zqas qs xqwd cqwdc ergb rthnty</p><p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p><p>zqas qs xqwd cqwdc ergb rthnty</p><p>svadasd fasdf asdf asdf asdf asdf </p><p>ghnfg n fgn fghn dgn dghn </p>
         <Modal
           title="כותרת חלון מודל"
           visible={visible}
@@ -60,11 +56,6 @@ class ModalExample extends Component {
           <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>
           <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>
           <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>
-          <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>
-          <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>
-          <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>
-          <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>
-          <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>
         </Modal>
       </Fragment>
     )
@@ -74,6 +65,20 @@ class ModalExample extends Component {
 
 
 storiesOf('Modal', module)
-  .add('default', () => (
-    <ModalExample />
+  .add('code', () => (
+    <Fragment>
+      <Story.Header
+        title="חלון מודל"
+        info="הצגת חלון מודל להצגת תוגן נוסף לעמוד"
+      />
+      <Story.Group full>
+        <Story
+          title="שימוש רגיל"
+          info="שימוש רגיל"
+        >
+          <ModalExample />
+        </Story>
+      </Story.Group>
+      <Story.PropsTable type={Modal} />
+    </Fragment>
   ))

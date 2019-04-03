@@ -9,7 +9,14 @@ const Label = ({children, forName, required}) => {
 }
 
 Label.propTypes = {
+  /**
+   * whether input is required. will show asterix
+   */
   required: PropTypes.bool,
+
+  /**
+   * will connect label to the form input by id
+   */
   forName: PropTypes.string
 }
 

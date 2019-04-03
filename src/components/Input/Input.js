@@ -246,25 +246,85 @@ class Input extends Component {
 }
 
 Input.propTypes = {
-  type: PropTypes.string,
-  className: PropTypes.string,
+  /**
+   * the type of input
+   */
+  type: PropTypes.oneOf(['text', 'password', 'number']), // TODO: add support
+
+
+  onKeyDown: PropTypes.func,
   onKeyUp: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
+
+  /**
+   * the ID for input. will be used also in label
+   */
   id: PropTypes.string,
+
+  /**
+   * input maxlength
+   */
   maxLength: PropTypes.number,
+
+  /**
+   * whether the input is disabled
+   */
   disabled: PropTypes.bool,
+
+  /**
+   * the input content value
+   */
   value: PropTypes.any,
+
+  /**
+   * the initial input content
+   */
   defaultValue: PropTypes.any,
+
+  /**
+   * the callback function that is triggered when Enter key is pressed
+   */
   onPressEnter: PropTypes.func,
-  onKeyDown: PropTypes.func,
+
+  /**
+   * the label text displayed before (on the right side of) the input field
+   */
   addonBefore: PropTypes.node,
+
+  /**
+   * the label text displayed after (on the right side of) the input field
+   */
   addonAfter: PropTypes.node,
-  prefix: PropTypes.element,
-  suffix: PropTypes.element,
+
+  /**
+   * The prefix icon, or string, for the Input
+   */
+  prefix: PropTypes.node,
+
+  /**
+   * the suffix icon, or string, for the Input
+   */
+  suffix: PropTypes.node,
+
+  /**
+   * message that will appear beneath the input if invalid
+   */
   explain: PropTypes.string,
+
+  /**
+   * message that will be beneath the input always
+   */
   info: PropTypes.string,
+
+  /**
+   * label for input
+   */
   label: PropTypes.node,
+
+  /**
+   * whether the input is required
+   */
   required: PropTypes.bool
 }
 

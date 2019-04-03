@@ -124,10 +124,6 @@ class Modal extends Component {
       width
     } = this.props;
 
-    if (typeof width === 'undefined') {
-      return '520px';
-    }
-
     return (isInteger(width)) ? `${width}px` : width;
   }
 
@@ -195,14 +191,49 @@ class Modal extends Component {
 
 
 Modal.propTypes = {
+  /**
+   * id of modal. used for accessibility
+   */
   id: PropTypes.string,
+
+  /**
+   * modal title
+   */
   title: PropTypes.string,
+
+  /**
+   * footer content. will usualy hold action button
+   */
   footer: PropTypes.node,
+
+  /**
+   * whether the modal dialog is visible or not
+   */
   visible: PropTypes.bool,
+
+  /**
+   * specify a function that will be called when a user clicks mask, close X button on top left or Cancel button
+   */
   handleCancel: PropTypes.func,
+
+  /**
+   * whether to close the modal dialog when the mask (area outside the modal) is clicked
+   */
   wrapClosable: PropTypes.bool,
+
+  /**
+   * whether support press esc to close
+   */
   keyboard: PropTypes.bool,
+
+  /**
+   * whether to show close X button on top left
+   */
   showClosable: PropTypes.bool,
+
+  /**
+   * modal width
+   */
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }
 
@@ -211,8 +242,8 @@ Modal.defaultProps = {
   handleCancel: noop,
   wrapClosable: true,
   keyboard: true,
-  showClosable: true
-
+  showClosable: true,
+  width: '520px'
 }
 
 

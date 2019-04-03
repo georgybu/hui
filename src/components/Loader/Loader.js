@@ -1,5 +1,6 @@
 import React from 'react';
 import WithStyle from './Loader.style';
+import PropTypes from 'prop-types';
 
 
 const Loader = (props) => {
@@ -28,8 +29,18 @@ const Loader = (props) => {
   )
 }
 
+Loader.propTypes = {
+  active: PropTypes.bool,
+  inline: PropTypes.bool,
+  inverted: PropTypes.bool,
+  size: PropTypes.oneOf(['small', 'large', 'medium', 'xlarge', 'xxlarge'])
+}
+
 Loader.defaultProps = {
-  size: 'medium'
+  size: 'medium',
+  active: true,
+  inline: false,
+  inverted: false
 }
 
 export default Loader;

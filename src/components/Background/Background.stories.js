@@ -4,7 +4,6 @@ import { Background } from '../../index';
 import Story from '../../../.storybook/components/Story';
 
 
-
 storiesOf('Background', module)
   .add('code', () => (
     <Fragment>
